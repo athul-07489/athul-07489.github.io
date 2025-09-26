@@ -9,33 +9,33 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background: #1a202c;
-            color: #e2e8f0;
-            background: radial-gradient(circle, rgba(45,55,72,1) 0%, rgba(26,32,44,1) 100%);
+            background: #1e2820; /* Dark army green */
+            color: #d1d5db; /* Light gray for text */
+            background: radial-gradient(circle, rgba(38,48,40,1) 0%, rgba(22,28,24,1) 100%);
             min-height: 100vh;
         }
         .container {
             max-width: 1000px;
         }
         .card {
-            background-color: #2d3748;
+            background-color: #2c3e2f; /* Deeper green */
             border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2), 0 1px 3px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            animation: float 5s ease-in-out infinite; /* Added a subtle floating animation */
+            animation: float 5s ease-in-out infinite;
         }
         .card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2), 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3), 0 4px 6px rgba(0, 0, 0, 0.15);
         }
         .section-title {
-            color: #cbd5e0;
+            color: #e5e7eb; /* Off-white for titles */
         }
         .project-item {
             transition: background-color 0.3s ease, transform 0.3s ease;
         }
         .project-item:hover {
-            background-color: #4a5568;
+            background-color: #4b554e; /* Lighter green on hover */
             transform: scale(1.02);
         }
 
@@ -59,7 +59,7 @@
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.7);
-            display: none; /* Hidden by default */
+            display: none;
             align-items: center;
             justify-content: center;
             z-index: 1000;
@@ -68,7 +68,7 @@
             display: flex;
         }
         .modal-content {
-            background-color: #2d3748;
+            background-color: #2c3e2f;
             padding: 2rem;
             border-radius: 12px;
             width: 90%;
@@ -88,13 +88,12 @@
             font-size: 2rem;
             line-height: 1;
             cursor: pointer;
-            color: #e2e8f0;
+            color: #d1d5db;
             transition: color 0.2s;
         }
         .close-button:hover {
-            color: #cbd5e0;
+            color: #9ca3af;
         }
-        /* New floating animation for the cards */
         @keyframes float {
             0% {
                 transform: translateY(0);
@@ -107,100 +106,114 @@
             }
         }
 
-
-        /* Car Animation Styles */
-        .car-container {
+        /* Tank Animation Styles */
+        .tank-container {
             position: fixed;
             bottom: 20px;
-            left: -100px; /* Start off-screen */
-            width: 100px;
-            height: 40px;
+            left: -200px;
+            width: 150px;
+            height: 60px;
             z-index: 50;
-            animation: drive 15s linear infinite;
+            animation: advance 20s linear infinite;
         }
 
-        .car-body {
+        .tank-body {
             width: 100%;
-            height: 30px;
-            background-color: #ef4444; /* A nice red color */
+            height: 40px;
+            background-color: #4b554e;
             border-radius: 8px 8px 0 0;
             position: relative;
         }
 
-        .car-wheel {
+        .tank-turret {
             position: absolute;
-            bottom: -10px;
-            width: 20px;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 30px;
+            background-color: #5d6d5f;
+            border-radius: 50% 50% 0 0;
+        }
+
+        .tank-barrel {
+            position: absolute;
+            top: 5px;
+            left: 90%;
+            width: 70px;
+            height: 8px;
+            background-color: #3b423c;
+            transform: rotate(10deg);
+        }
+
+        .tank-track {
+            position: absolute;
+            bottom: -5px;
+            width: 100%;
             height: 20px;
-            background-color: #1f2937; /* Dark gray for wheels */
-            border-radius: 50%;
-            border: 2px solid #6b7280;
+            background-color: #313732;
+            border-radius: 10px;
         }
 
-        .car-wheel.front {
-            left: 10px;
-        }
-
-        .car-wheel.back {
-            right: 10px;
-        }
-
-        @keyframes drive {
+        @keyframes advance {
             0% {
-                left: -100px;
+                left: -200px;
             }
             100% {
-                left: calc(100% + 100px); /* Go off-screen to the right */
+                left: calc(100% + 200px);
             }
         }
-        
-        /* Fighter Jet Animation Styles */
-        .jet-container {
+
+        /* Helicopter Animation Styles */
+        .heli-container {
             position: fixed;
             top: 20px;
-            right: -150px; /* Start off-screen to the right */
-            width: 120px;
-            height: 50px;
+            right: -250px;
+            width: 200px;
+            height: 80px;
             z-index: 50;
-            animation: fly 10s linear infinite;
+            animation: patrol 15s linear infinite;
         }
 
-        .jet-body {
-            width: 100%;
-            height: 25px;
-            background-color: #4f46e5; /* A vibrant indigo color */
+        .heli-body {
+            width: 100px;
+            height: 40px;
+            background-color: #4b554e;
+            border-radius: 20px;
             position: relative;
-            transform: skewX(-20deg);
-            border-radius: 4px;
-        }
-        
-        .jet-wing {
-            position: absolute;
-            bottom: -15px;
-            left: 20px;
-            width: 50px;
-            height: 20px;
-            background-color: #4f46e5;
-            transform: skewY(25deg);
-            border-radius: 0 0 8px 8px;
         }
 
-        .jet-tail {
+        .main-rotor, .tail-rotor {
             position: absolute;
-            top: -10px;
-            right: 15px;
-            width: 10px;
-            height: 25px;
-            background-color: #4f46e5;
-            transform: skewY(25deg);
+            background-color: #5d6d5f;
+            animation: spin 0.5s linear infinite;
         }
 
-        @keyframes fly {
+        .main-rotor {
+            top: -20px;
+            left: 30px;
+            width: 100px;
+            height: 5px;
+        }
+
+        .tail-rotor {
+            right: -20px;
+            top: 10px;
+            width: 5px;
+            height: 40px;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes patrol {
             0% {
-                right: -150px;
+                right: -250px;
             }
             100% {
-                right: calc(100% + 150px); /* Go off-screen to the left */
+                right: calc(100% + 250px);
             }
         }
     </style>
@@ -211,14 +224,14 @@
         
         <!-- Header Section -->
         <header class="text-center mb-12">
-            <div class="relative w-32 h-32 mx-auto mb-4 overflow-hidden rounded-full border-4 border-blue-500">
-                <img src="https://placehold.co/128x128/4a5568/a0aec0?text=AK" alt="Profile Picture" class="w-full h-full object-cover">
+            <div class="relative w-32 h-32 mx-auto mb-4 overflow-hidden rounded-full border-4 border-lime-500">
+                <img src="https://placehold.co/128x128/4b554e/e5e7eb?text=CO" alt="Profile Picture" class="w-full h-full object-cover">
                 <span class="absolute bottom-1 right-1 h-4 w-4 bg-green-500 rounded-full border-2 border-white"></span>
             </div>
             <h1 class="text-4xl md:text-5xl font-bold text-white mb-2">Athul Krishna K</h1>
-            <p class="text-lg md:text-xl text-gray-400">B.Tech in Computer Science and Engineering</p>
-            <button id="contact-button" class="mt-6 px-6 py-2 bg-blue-600 text-white font-semibold rounded-full shadow-lg hover:bg-blue-700 transition-all duration-300 transform hover:scale-105">
-                Contact Me
+            <p class="text-lg md:text-xl text-gray-400">Tactical Operations Officer</p>
+            <button id="contact-button" class="mt-6 px-6 py-2 bg-lime-600 text-white font-semibold rounded-full shadow-lg hover:bg-lime-700 transition-all duration-300 transform hover:scale-105">
+                Secure Comms
             </button>
         </header>
 
@@ -228,26 +241,26 @@
             <!-- Contact & About Section -->
             <div class="col-span-1 md:col-span-1">
                 <div class="card p-6 mb-6 fade-in-section">
-                    <h2 class="section-title text-2xl font-semibold mb-4">Contact & Location</h2>
+                    <h2 class="section-title text-2xl font-semibold mb-4">Secure Comms</h2>
                     <ul class="space-y-2 text-gray-300">
                         <li class="flex items-center space-x-2">
-                            <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
-                            <span>Thrissur, Kerala</span>
+                            <svg class="w-5 h-5 text-lime-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                            <span>Base: Thrissur, Kerala</span>
                         </li>
                         <li class="flex items-center space-x-2">
-                            <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                            <span>athul.krishna@email.com</span>
+                            <svg class="w-5 h-5 text-lime-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                            <span>comms: athul.krishna@email.com</span>
                         </li>
                         <li class="flex items-center space-x-2">
-                            <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
-                            <a href="#" class="hover:text-blue-400 transition-colors">GitHub Profile</a>
+                            <svg class="w-5 h-5 text-lime-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
+                            <a href="#" class="hover:text-lime-400 transition-colors">Tactical Data Log</a>
                         </li>
                     </ul>
                 </div>
 
                 <div class="card p-6 fade-in-section">
-                    <h2 class="section-title text-2xl font-semibold mb-4">Education</h2>
-                    <div class="border-l-4 border-blue-500 pl-4">
+                    <h2 class="section-title text-2xl font-semibold mb-4">Training History</h2>
+                    <div class="border-l-4 border-lime-500 pl-4">
                         <h3 class="text-xl font-semibold text-gray-100">B.Tech in Computer Science and Engineering</h3>
                         <p class="text-sm text-gray-400">2021 - Present</p>
                         <p class="text-gray-300 mt-2">Vidya Academy of Science and Technology</p>
@@ -258,9 +271,9 @@
             <!-- Skills & Projects Section -->
             <div class="col-span-1 md:col-span-2">
                 
-                <!-- About Section (add more details here) -->
+                <!-- About Section -->
                 <div class="card p-6 mb-6 fade-in-section">
-                    <h2 class="section-title text-2xl font-semibold mb-4">About Me</h2>
+                    <h2 class="section-title text-2xl font-semibold mb-4">Mission Briefing</h2>
                     <p class="text-gray-300">
                         I am a passionate and driven B.Tech student specializing in Computer Science and Engineering. I am based in Thrissur, Kerala, and have a keen interest in developing innovative solutions. I am constantly seeking to learn and apply new technologies to solve real-world problems.
                     </p>
@@ -268,7 +281,7 @@
 
                 <!-- Skills Section -->
                 <div class="card p-6 mb-6 fade-in-section">
-                    <h2 class="section-title text-2xl font-semibold mb-4">Skills</h2>
+                    <h2 class="section-title text-2xl font-semibold mb-4">Tactical Arsenal</h2>
                     <div class="flex flex-wrap gap-2">
                         <span class="bg-gray-700 text-gray-200 text-sm font-medium px-3 py-1 rounded-full">Web Development</span>
                         <span class="bg-gray-700 text-gray-200 text-sm font-medium px-3 py-1 rounded-full">Python</span>
@@ -281,16 +294,16 @@
 
                 <!-- Interests & Hobbies Section -->
                 <div class="card p-6 mb-6 fade-in-section">
-                    <h2 class="section-title text-2xl font-semibold mb-4">Interests & Hobbies</h2>
+                    <h2 class="section-title text-2xl font-semibold mb-4">Reconnaissance & Recreation</h2>
                     <ul class="space-y-2 text-gray-300">
                         <li class="flex items-center space-x-2">
-                            <svg class="w-5 h-5 text-blue-400" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <svg class="w-5 h-5 text-lime-400" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
                             </svg>
                             <span>Hangboard Training</span>
                         </li>
                         <li class="flex items-center space-x-2">
-                            <svg class="w-5 h-5 text-blue-400" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <svg class="w-5 h-5 text-lime-400" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
                             </svg>
                             <span>Reading Science Fiction</span>
@@ -300,19 +313,19 @@
                 
                 <!-- Projects Section -->
                 <div class="card p-6 fade-in-section">
-                    <h2 class="section-title text-2xl font-semibold mb-4">Projects</h2>
+                    <h2 class="section-title text-2xl font-semibold mb-4">Deployed Operations</h2>
                     <div class="space-y-6">
                         <!-- Project 1 -->
                         <div class="project-item bg-gray-700 p-4 rounded-lg">
-                            <h3 class="text-xl font-semibold text-gray-100 mb-1">Project Title 1</h3>
+                            <h3 class="text-xl font-semibold text-gray-100 mb-1">Operation: Project Title 1</h3>
                             <p class="text-gray-400 text-sm mb-2">A brief description of the project.</p>
-                            <a href="#" class="text-blue-400 hover:underline">View on GitHub &rarr;</a>
+                            <a href="#" class="text-lime-400 hover:underline">View on GitHub &rarr;</a>
                         </div>
                         <!-- Project 2 -->
                         <div class="project-item bg-gray-700 p-4 rounded-lg">
-                            <h3 class="text-xl font-semibold text-gray-100 mb-1">Project Title 2</h3>
+                            <h3 class="text-xl font-semibold text-gray-100 mb-1">Operation: Project Title 2</h3>
                             <p class="text-gray-400 text-sm mb-2">A brief description of the project.</p>
-                            <a href="#" class="text-blue-400 hover:underline">View on GitHub &rarr;</a>
+                            <a href="#" class="text-lime-400 hover:underline">View on GitHub &rarr;</a>
                         </div>
                     </div>
                 </div>
@@ -326,21 +339,21 @@
     <div id="contact-modal" class="modal">
         <div class="modal-content">
             <span id="close-modal-button" class="close-button">&times;</span>
-            <h2 class="section-title text-3xl font-bold mb-4">Get In Touch</h2>
+            <h2 class="section-title text-3xl font-bold mb-4">Transmit Message</h2>
             <form id="contact-form" class="space-y-4">
                 <div>
-                    <label for="name" class="block text-sm font-medium text-gray-400">Name</label>
-                    <input type="text" id="name" name="name" class="mt-1 block w-full rounded-md bg-gray-700 border-gray-600 text-white shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500" required>
+                    <label for="name" class="block text-sm font-medium text-gray-400">Agent Name</label>
+                    <input type="text" id="name" name="name" class="mt-1 block w-full rounded-md bg-gray-700 border-gray-600 text-white shadow-sm p-2 focus:ring-lime-500 focus:border-lime-500" required>
                 </div>
                 <div>
-                    <label for="email" class="block text-sm font-medium text-gray-400">Email</label>
-                    <input type="email" id="email" name="email" class="mt-1 block w-full rounded-md bg-gray-700 border-gray-600 text-white shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500" required>
+                    <label for="email" class="block text-sm font-medium text-gray-400">Secure Frequency</label>
+                    <input type="email" id="email" name="email" class="mt-1 block w-full rounded-md bg-gray-700 border-gray-600 text-white shadow-sm p-2 focus:ring-lime-500 focus:border-lime-500" required>
                 </div>
                 <div>
                     <label for="message" class="block text-sm font-medium text-gray-400">Message</label>
-                    <textarea id="message" name="message" rows="4" class="mt-1 block w-full rounded-md bg-gray-700 border-gray-600 text-white shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500" required></textarea>
+                    <textarea id="message" name="message" rows="4" class="mt-1 block w-full rounded-md bg-gray-700 border-gray-600 text-white shadow-sm p-2 focus:ring-lime-500 focus:border-lime-500" required></textarea>
                 </div>
-                <button type="submit" class="w-full px-4 py-2 bg-blue-600 text-white font-semibold rounded-md shadow-lg hover:bg-blue-700 transition-colors">
+                <button type="submit" class="w-full px-4 py-2 bg-lime-600 text-white font-semibold rounded-md shadow-lg hover:bg-lime-700 transition-colors">
                     Send Message
                 </button>
             </form>
@@ -352,19 +365,21 @@
         Message sent successfully!
     </div>
 
-    <!-- Car Animation -->
-    <div id="car-container" class="car-container">
-        <div class="car-body">
-            <div class="car-wheel front"></div>
-            <div class="car-wheel back"></div>
+    <!-- Tank Animation -->
+    <div id="tank-container" class="tank-container">
+        <div class="tank-body">
+            <div class="tank-turret">
+                <div class="tank-barrel"></div>
+            </div>
+            <div class="tank-track"></div>
         </div>
     </div>
 
-    <!-- Fighter Jet Animation -->
-    <div id="jet-container" class="jet-container">
-        <div class="jet-body">
-            <div class="jet-wing"></div>
-            <div class="jet-tail"></div>
+    <!-- Helicopter Animation -->
+    <div id="heli-container" class="heli-container">
+        <div class="heli-body">
+            <div class="main-rotor"></div>
+            <div class="tail-rotor"></div>
         </div>
     </div>
 
@@ -408,36 +423,35 @@
             // Form submission placeholder
             const contactForm = document.getElementById('contact-form');
             contactForm.addEventListener('submit', (event) => {
-                event.preventDefault(); // Prevents the form from actually submitting
+                event.preventDefault();
                 
-                // For demonstration, show success message and close modal
                 successMessage.style.transform = 'scale(1)';
                 successMessage.style.opacity = '1';
                 setTimeout(() => {
                     successMessage.style.transform = 'scale(0)';
                     successMessage.style.opacity = '0';
-                }, 3000); // Hide after 3 seconds
+                }, 3000);
 
                 modal.classList.remove('show');
                 contactForm.reset();
             });
 
             // Get a reference to the animation containers
-            const carContainer = document.getElementById('car-container');
-            const jetContainer = document.getElementById('jet-container');
+            const tankContainer = document.getElementById('tank-container');
+            const heliContainer = document.getElementById('heli-container');
             let isPaused = false;
 
             // Keyboard interaction for pausing/playing animations
             document.addEventListener('keydown', (event) => {
-                if (event.code === 'Space') { // Use the Spacebar to toggle
-                    event.preventDefault(); // Prevent default spacebar action (like scrolling)
+                if (event.code === 'Space') {
+                    event.preventDefault();
                     isPaused = !isPaused;
                     if (isPaused) {
-                        carContainer.style.animationPlayState = 'paused';
-                        jetContainer.style.animationPlayState = 'paused';
+                        tankContainer.style.animationPlayState = 'paused';
+                        heliContainer.style.animationPlayState = 'paused';
                     } else {
-                        carContainer.style.animationPlayState = 'running';
-                        jetContainer.style.animationPlayState = 'running';
+                        tankContainer.style.animationPlayState = 'running';
+                        heliContainer.style.animationPlayState = 'running';
                     }
                 }
             });
