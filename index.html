@@ -9,8 +9,10 @@
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #1a202c;
+            background: #1a202c;
             color: #e2e8f0;
+            background: radial-gradient(circle, rgba(45,55,72,1) 0%, rgba(26,32,44,1) 100%);
+            min-height: 100vh;
         }
         .container {
             max-width: 1000px;
@@ -18,9 +20,188 @@
         .card {
             background-color: #2d3748;
             border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: float 5s ease-in-out infinite; /* Added a subtle floating animation */
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.2), 0 4px 6px rgba(0, 0, 0, 0.1);
         }
         .section-title {
             color: #cbd5e0;
+        }
+        .project-item {
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .project-item:hover {
+            background-color: #4a5568;
+            transform: scale(1.02);
+        }
+
+        /* Animation for sections */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+            will-change: opacity, transform;
+        }
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Modal specific styles */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: none; /* Hidden by default */
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        .modal.show {
+            display: flex;
+        }
+        .modal-content {
+            background-color: #2d3748;
+            padding: 2rem;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+            animation: fadeIn 0.3s ease-out;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 2rem;
+            line-height: 1;
+            cursor: pointer;
+            color: #e2e8f0;
+            transition: color 0.2s;
+        }
+        .close-button:hover {
+            color: #cbd5e0;
+        }
+        /* New floating animation for the cards */
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-5px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
+
+
+        /* Car Animation Styles */
+        .car-container {
+            position: fixed;
+            bottom: 20px;
+            left: -100px; /* Start off-screen */
+            width: 100px;
+            height: 40px;
+            z-index: 50;
+            animation: drive 15s linear infinite;
+        }
+
+        .car-body {
+            width: 100%;
+            height: 30px;
+            background-color: #ef4444; /* A nice red color */
+            border-radius: 8px 8px 0 0;
+            position: relative;
+        }
+
+        .car-wheel {
+            position: absolute;
+            bottom: -10px;
+            width: 20px;
+            height: 20px;
+            background-color: #1f2937; /* Dark gray for wheels */
+            border-radius: 50%;
+            border: 2px solid #6b7280;
+        }
+
+        .car-wheel.front {
+            left: 10px;
+        }
+
+        .car-wheel.back {
+            right: 10px;
+        }
+
+        @keyframes drive {
+            0% {
+                left: -100px;
+            }
+            100% {
+                left: calc(100% + 100px); /* Go off-screen to the right */
+            }
+        }
+        
+        /* Fighter Jet Animation Styles */
+        .jet-container {
+            position: fixed;
+            top: 20px;
+            right: -150px; /* Start off-screen to the right */
+            width: 120px;
+            height: 50px;
+            z-index: 50;
+            animation: fly 10s linear infinite;
+        }
+
+        .jet-body {
+            width: 100%;
+            height: 25px;
+            background-color: #4f46e5; /* A vibrant indigo color */
+            position: relative;
+            transform: skewX(-20deg);
+            border-radius: 4px;
+        }
+        
+        .jet-wing {
+            position: absolute;
+            bottom: -15px;
+            left: 20px;
+            width: 50px;
+            height: 20px;
+            background-color: #4f46e5;
+            transform: skewY(25deg);
+            border-radius: 0 0 8px 8px;
+        }
+
+        .jet-tail {
+            position: absolute;
+            top: -10px;
+            right: 15px;
+            width: 10px;
+            height: 25px;
+            background-color: #4f46e5;
+            transform: skewY(25deg);
+        }
+
+        @keyframes fly {
+            0% {
+                right: -150px;
+            }
+            100% {
+                right: calc(100% + 150px); /* Go off-screen to the left */
+            }
         }
     </style>
 </head>
@@ -36,6 +217,9 @@
             </div>
             <h1 class="text-4xl md:text-5xl font-bold text-white mb-2">Athul Krishna K</h1>
             <p class="text-lg md:text-xl text-gray-400">B.Tech in Computer Science and Engineering</p>
+            <button id="contact-button" class="mt-6 px-6 py-2 bg-blue-600 text-white font-semibold rounded-full shadow-lg hover:bg-blue-700 transition-all duration-300 transform hover:scale-105">
+                Contact Me
+            </button>
         </header>
 
         <!-- Main Content -->
@@ -43,7 +227,7 @@
 
             <!-- Contact & About Section -->
             <div class="col-span-1 md:col-span-1">
-                <div class="card p-6 mb-6">
+                <div class="card p-6 mb-6 fade-in-section">
                     <h2 class="section-title text-2xl font-semibold mb-4">Contact & Location</h2>
                     <ul class="space-y-2 text-gray-300">
                         <li class="flex items-center space-x-2">
@@ -52,7 +236,7 @@
                         </li>
                         <li class="flex items-center space-x-2">
                             <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-                            <span>your.email@example.com</span>
+                            <span>athul.krishna@email.com</span>
                         </li>
                         <li class="flex items-center space-x-2">
                             <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"></path></svg>
@@ -61,7 +245,7 @@
                     </ul>
                 </div>
 
-                <div class="card p-6">
+                <div class="card p-6 fade-in-section">
                     <h2 class="section-title text-2xl font-semibold mb-4">Education</h2>
                     <div class="border-l-4 border-blue-500 pl-4">
                         <h3 class="text-xl font-semibold text-gray-100">B.Tech in Computer Science and Engineering</h3>
@@ -75,7 +259,7 @@
             <div class="col-span-1 md:col-span-2">
                 
                 <!-- About Section (add more details here) -->
-                <div class="card p-6 mb-6">
+                <div class="card p-6 mb-6 fade-in-section">
                     <h2 class="section-title text-2xl font-semibold mb-4">About Me</h2>
                     <p class="text-gray-300">
                         I am a passionate and driven B.Tech student specializing in Computer Science and Engineering. I am based in Thrissur, Kerala, and have a keen interest in developing innovative solutions. I am constantly seeking to learn and apply new technologies to solve real-world problems.
@@ -83,7 +267,7 @@
                 </div>
 
                 <!-- Skills Section -->
-                <div class="card p-6 mb-6">
+                <div class="card p-6 mb-6 fade-in-section">
                     <h2 class="section-title text-2xl font-semibold mb-4">Skills</h2>
                     <div class="flex flex-wrap gap-2">
                         <span class="bg-gray-700 text-gray-200 text-sm font-medium px-3 py-1 rounded-full">Web Development</span>
@@ -95,18 +279,37 @@
                     </div>
                 </div>
 
+                <!-- Interests & Hobbies Section -->
+                <div class="card p-6 mb-6 fade-in-section">
+                    <h2 class="section-title text-2xl font-semibold mb-4">Interests & Hobbies</h2>
+                    <ul class="space-y-2 text-gray-300">
+                        <li class="flex items-center space-x-2">
+                            <svg class="w-5 h-5 text-blue-400" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                            </svg>
+                            <span>Hangboard Training</span>
+                        </li>
+                        <li class="flex items-center space-x-2">
+                            <svg class="w-5 h-5 text-blue-400" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                            </svg>
+                            <span>Reading Science Fiction</span>
+                        </li>
+                    </ul>
+                </div>
+                
                 <!-- Projects Section -->
-                <div class="card p-6">
+                <div class="card p-6 fade-in-section">
                     <h2 class="section-title text-2xl font-semibold mb-4">Projects</h2>
                     <div class="space-y-6">
                         <!-- Project 1 -->
-                        <div class="bg-gray-700 p-4 rounded-lg">
+                        <div class="project-item bg-gray-700 p-4 rounded-lg">
                             <h3 class="text-xl font-semibold text-gray-100 mb-1">Project Title 1</h3>
                             <p class="text-gray-400 text-sm mb-2">A brief description of the project.</p>
                             <a href="#" class="text-blue-400 hover:underline">View on GitHub &rarr;</a>
                         </div>
                         <!-- Project 2 -->
-                        <div class="bg-gray-700 p-4 rounded-lg">
+                        <div class="project-item bg-gray-700 p-4 rounded-lg">
                             <h3 class="text-xl font-semibold text-gray-100 mb-1">Project Title 2</h3>
                             <p class="text-gray-400 text-sm mb-2">A brief description of the project.</p>
                             <a href="#" class="text-blue-400 hover:underline">View on GitHub &rarr;</a>
@@ -119,5 +322,126 @@
 
     </div>
 
+    <!-- Contact Form Modal -->
+    <div id="contact-modal" class="modal">
+        <div class="modal-content">
+            <span id="close-modal-button" class="close-button">&times;</span>
+            <h2 class="section-title text-3xl font-bold mb-4">Get In Touch</h2>
+            <form id="contact-form" class="space-y-4">
+                <div>
+                    <label for="name" class="block text-sm font-medium text-gray-400">Name</label>
+                    <input type="text" id="name" name="name" class="mt-1 block w-full rounded-md bg-gray-700 border-gray-600 text-white shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500" required>
+                </div>
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-400">Email</label>
+                    <input type="email" id="email" name="email" class="mt-1 block w-full rounded-md bg-gray-700 border-gray-600 text-white shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500" required>
+                </div>
+                <div>
+                    <label for="message" class="block text-sm font-medium text-gray-400">Message</label>
+                    <textarea id="message" name="message" rows="4" class="mt-1 block w-full rounded-md bg-gray-700 border-gray-600 text-white shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500" required></textarea>
+                </div>
+                <button type="submit" class="w-full px-4 py-2 bg-blue-600 text-white font-semibold rounded-md shadow-lg hover:bg-blue-700 transition-colors">
+                    Send Message
+                </button>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Success Message Pop-up -->
+    <div id="success-message" class="fixed bottom-8 left-1/2 -translate-x-1/2 bg-green-600 text-white px-6 py-3 rounded-full shadow-lg transition-transform duration-500 transform scale-0 opacity-0 z-50">
+        Message sent successfully!
+    </div>
+
+    <!-- Car Animation -->
+    <div id="car-container" class="car-container">
+        <div class="car-body">
+            <div class="car-wheel front"></div>
+            <div class="car-wheel back"></div>
+        </div>
+    </div>
+
+    <!-- Fighter Jet Animation -->
+    <div id="jet-container" class="jet-container">
+        <div class="jet-body">
+            <div class="jet-wing"></div>
+            <div class="jet-tail"></div>
+        </div>
+    </div>
+
+    <script>
+        window.onload = function() {
+            // Intersection Observer for fade-in animations
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.15 });
+
+            document.querySelectorAll('.fade-in-section').forEach(section => {
+                observer.observe(section);
+            });
+
+            // Modal functionality
+            const contactButton = document.getElementById('contact-button');
+            const modal = document.getElementById('contact-modal');
+            const closeModalButton = document.getElementById('close-modal-button');
+            const successMessage = document.getElementById('success-message');
+
+            contactButton.addEventListener('click', () => {
+                modal.classList.add('show');
+            });
+
+            closeModalButton.addEventListener('click', () => {
+                modal.classList.remove('show');
+            });
+
+            // Close the modal when clicking outside of it
+            window.addEventListener('click', (event) => {
+                if (event.target == modal) {
+                    modal.classList.remove('show');
+                }
+            });
+
+            // Form submission placeholder
+            const contactForm = document.getElementById('contact-form');
+            contactForm.addEventListener('submit', (event) => {
+                event.preventDefault(); // Prevents the form from actually submitting
+                
+                // For demonstration, show success message and close modal
+                successMessage.style.transform = 'scale(1)';
+                successMessage.style.opacity = '1';
+                setTimeout(() => {
+                    successMessage.style.transform = 'scale(0)';
+                    successMessage.style.opacity = '0';
+                }, 3000); // Hide after 3 seconds
+
+                modal.classList.remove('show');
+                contactForm.reset();
+            });
+
+            // Get a reference to the animation containers
+            const carContainer = document.getElementById('car-container');
+            const jetContainer = document.getElementById('jet-container');
+            let isPaused = false;
+
+            // Keyboard interaction for pausing/playing animations
+            document.addEventListener('keydown', (event) => {
+                if (event.code === 'Space') { // Use the Spacebar to toggle
+                    event.preventDefault(); // Prevent default spacebar action (like scrolling)
+                    isPaused = !isPaused;
+                    if (isPaused) {
+                        carContainer.style.animationPlayState = 'paused';
+                        jetContainer.style.animationPlayState = 'paused';
+                    } else {
+                        carContainer.style.animationPlayState = 'running';
+                        jetContainer.style.animationPlayState = 'running';
+                    }
+                }
+            });
+        };
+    </script>
 </body>
 </html>
